@@ -5,10 +5,10 @@ import Features from "./components/Features";
 import Workflow from "./components/Workflow";
 import Industries from "./components/Industries";
 import TechStack from "./components/TechStack";
-import Pricing from "./components/Pricing";
 import Testimonials from "./components/Testimonials";
 import About from "./components/About";
 import Footer from "./components/Footer";
+import Tagline from "./components/Tagline";
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -20,14 +20,14 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div style={{ minHeight: "100vh", backgroundColor: "#000", color: "#fff" }}>
       <Navbar scrolled={scrolled} />
       <Hero />
+      <Tagline />
       <Features />
       <Workflow />
       <Industries />
       <TechStack />
-      <Pricing />
       <Testimonials />
       <About />
       <Footer />
