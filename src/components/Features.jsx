@@ -1,126 +1,122 @@
-const services = [
+import { useState } from "react";
+import { ChevronDown, ArrowUpRight } from "lucide-react";
+
+const SERVICES = [
   {
-    icon: "🧩",
+    id: "web-dev", num: "01",
     title: "Web Development",
-    description:
-      "From clean landing pages to fully tailored experiences — we build websites that convert, perform, and scale. Whether you need a basic online presence or a custom 3D-powered brand site, we deliver it right.",
+    tagline: "Your organisation online — built to compete.",
+    desc: "From a simple presence to a fully custom 3D-powered brand site. We build websites that convert, perform, and represent you precisely.",
     tiers: [
-      { name: "Basic Package", price: "Starting $200", detail: "Clean, conversion-focused design. WordPress / Webflow." },
-      { name: "E-Commerce", price: "Starting $450", detail: "Built for high traffic & conversions. Industry-focused design. Free competitor analysis." },
-      { name: "Custom Websites", price: "Starting $1,500", detail: "Fully tailored design. 3D visuals & advanced UI. Custom admin panel. SEO-optimized content." },
+      { name: "Basic Package", price: "from $200", stack: "WordPress · Webflow · Shopify",
+        points: ["All you need in one place to put your organisation online", "Precisely edited to fit your needs", "Fast turnaround — live in days"] },
+      { name: "E-Commerce", price: "from $450", stack: "Shopify · WooCommerce",
+        points: ["Designed for your industry's needs", "Built with foundations to drive high traffic", "Free competitor analysis", "Optimised for future marketing campaigns"] },
+      { name: "Custom Websites", price: "from $1,500", stack: "React · Next.js · Three.js",
+        points: ["Custom-built design to match your look, feel & operations", "3D graphics and advanced UI", "Tailored admin panel", "Stationary designs & SEO-friendly content"] },
     ],
-    imagePosition: "left",
   },
   {
-    icon: "⚙️",
+    id: "web-apps", num: "02",
     title: "Web App Development",
-    description:
-      "We digitize your workflows, optimize communications, and build the operational systems your business actually needs — from record management to real-time data analytics.",
+    tagline: "Digitise your operations. Run smarter.",
+    desc: "We build the internal systems your business actually needs — workflow tools, communication platforms, dashboards, and data pipelines.",
     tiers: [
-      { name: "Operational Package", price: "Starting $600", detail: "Workflow digitization, communication optimization, record management, data analytics." },
-      { name: "Custom Solutions", price: "Starting $850", detail: "Built around your exact business needs and operational challenges." },
+      { name: "Operational Package", price: "from $600", stack: "Node.js · React · MySQL",
+        points: ["Digitise your workflow end-to-end", "Optimise operational communication", "Record maintenance & data management", "Data analysis for operational & marketing needs"] },
+      { name: "Custom Package", price: "from $850", stack: "Tailored to your stack",
+        points: ["We understand the nature of your work and the problems to solve", "Scoped precisely to your objectives", "Built to scale with your organisation"] },
     ],
-    imagePosition: "right",
   },
   {
-    icon: "📱",
-    title: "Mobile App Development",
-    description:
-      "End-to-end Android, iOS, and hybrid app development — built by experienced teams and fully deployed. From idea to app store, we own the entire pipeline.",
+    id: "mobile-ai", num: "03",
+    title: "Mobile App & AI Development",
+    tagline: "From idea to app store. End-to-end.",
+    desc: "A decade of experience building and deploying mobile applications — Android, iOS, hybrid, and AI-powered systems that run your operations.",
     tiers: [
-      { name: "Android / iOS / Hybrid", price: "Starting $1,200", detail: "End-to-end development & deployment. Built by experienced teams." },
+      { name: "Mobile Applications", price: "from $1,200", stack: "React Native · Swift · Kotlin",
+        points: ["Android, iOS, Windows & Hybrid Applications", "End-to-end development & deployment", "Built by a team with 10+ years of experience"] },
+      { name: "AI Integration", price: "Custom", stack: "Claude · GPT-4o · Kimi",
+        points: ["AI-assisted operations and workflow automation", "Intelligent data analysis for your business", "Seamlessly integrated into your existing systems"] },
     ],
-    imagePosition: "left",
   },
 ];
 
-export default function Features() {
+function ServiceBlock({ s }) {
+  const [open, setOpen] = useState(null);
+
   return (
-    <section
-      id="services"
-      className="py-16 sm:py-20 px-10 sm:px-6 lg:px-8 relative"
-    >
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <h2 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
-            <span className="bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent">
-              Services
-            </span>
-            <br />
-            <span className="bg-gradient-to-b from-blue-400 to-cyan-400 bg-clip-text text-transparent text-3xl sm:text-2xl md:text-3xl lg:text-4xl">
-              From first website to full digital operations — built around how you work.
-            </span>
-          </h2>
+    <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 56, paddingBottom: 56 }}>
+      {/* Header row */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: "3rem", alignItems: "start" }} className="service-grid">
+        {/* Left */}
+        <div>
+          <span style={{ fontFamily: "monospace", fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.3em" }}>{s.num}</span>
+          <h3 style={{ fontSize: "clamp(1.6rem,3vw,2.2rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.03em", margin: "10px 0 12px", lineHeight: 1.1 }}>{s.title}</h3>
+          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.38)", fontWeight: 300, lineHeight: 1.7, marginBottom: 14 }}>{s.desc}</p>
+          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.65)", fontStyle: "italic", marginBottom: 20 }}>{s.tagline}</p>
+          <a href="#contact" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", color: "#fff", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", paddingBottom: 2, fontWeight: 500 }}>
+            Get a quote <ArrowUpRight size={13} />
+          </a>
         </div>
 
-        <div className="space-y-16 sm:space-y-20 lg:space-y-32">
-          {services.map((service, key) => (
-            <div
-              key={key}
-              className={`flex flex-col lg:flex-row items-center gap-8 sm:gap-12 ${
-                service.imagePosition === "right" ? "lg:flex-row-reverse" : ""
-              }`}
-            >
-              {/* Tiers Panel */}
-              <div className="flex-1 w-full">
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl sm:rounded-2xl transition-all duration-500" />
-                  <div className="relative bg-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 overflow-hidden group-hover:border-blue-600/50 transition-all duration-300">
-                    <div className="bg-gray-950 rounded-lg p-4 sm:p-5 space-y-4">
-                      {/* IDE header */}
-                      <div className="flex items-center space-x-2 mb-2">
-                        <div className="flex space-x-1.5">
-                          <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                        </div>
-                        <span className="text-gray-400 ml-3 text-xs sm:text-sm font-mono">
-                          {service.icon} {service.title}
-                        </span>
-                      </div>
-
-                      {/* Tiers */}
-                      <div className="space-y-3">
-                        {service.tiers.map((tier) => (
-                          <div
-                            key={tier.name}
-                            className="border border-slate-700/60 rounded-lg p-3 sm:p-4 hover:border-blue-500/40 transition-colors duration-200 bg-slate-900/40"
-                          >
-                            <div className="flex justify-between items-start mb-1">
-                              <span className="text-white font-semibold text-sm sm:text-base">{tier.name}</span>
-                              <span className="text-blue-400 text-xs sm:text-sm font-mono whitespace-nowrap ml-2">{tier.price}</span>
-                            </div>
-                            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">{tier.detail}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+        {/* Right — tiers */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          {s.tiers.map((t, i) => (
+            <div key={t.name} style={{ border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, overflow: "hidden" }}>
+              <button
+                onClick={() => setOpen(open === i ? null : i)}
+                style={{
+                  width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+                  padding: "14px 18px", background: open === i ? "rgba(255,255,255,0.05)" : "transparent",
+                  border: "none", cursor: "pointer", color: "#fff", textAlign: "left",
+                  transition: "background 0.2s",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+                  <span style={{ fontSize: 14, fontWeight: 600 }}>{t.name}</span>
+                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", fontFamily: "monospace" }}>{t.stack}</span>
                 </div>
-              </div>
-
-              {/* Text section */}
-              <div className="flex-1 w-full">
-                <div className="max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
-                  <div className="text-4xl mb-3">{service.icon}</div>
-                  <h3 className="text-4xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 text-white">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-300 text-base text-xl sm:text-lg leading-relaxed">
-                    {service.description}
-                  </p>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center mt-6 gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium"
-                  >
-                    Get a quote →
-                  </a>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", fontFamily: "monospace", whiteSpace: "nowrap" }}>{t.price}</span>
+                  <ChevronDown size={15} style={{ color: "rgba(255,255,255,0.3)", transform: open === i ? "rotate(180deg)" : "none", transition: "transform 0.3s" }} />
                 </div>
-              </div>
+              </button>
+              {open === i && (
+                <div style={{ padding: "0 18px 16px", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                  <ul style={{ listStyle: "none", paddingTop: 14, display: "flex", flexDirection: "column", gap: 10 }}>
+                    {t.points.map(p => (
+                      <li key={p} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                        <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.25)", flexShrink: 0, marginTop: 7 }} />
+                        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", fontWeight: 300, lineHeight: 1.6 }}>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+export default function Features() {
+  return (
+    <section id="services" style={{ padding: "5rem 2rem", backgroundColor: "#000" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+        <div style={{ marginBottom: 48 }}>
+          <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.3em", textTransform: "uppercase", fontFamily: "monospace", marginBottom: 16 }}>Services</p>
+          <h2 style={{ fontSize: "clamp(2.8rem,6vw,5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
+            What we<br /><span style={{ color: "rgba(255,255,255,0.2)" }}>build for you</span>
+          </h2>
+        </div>
+        {SERVICES.map(s => <ServiceBlock key={s.id} s={s} />)}
+      </div>
+      <style>{`
+        @media (max-width: 768px) { .service-grid { grid-template-columns: 1fr !important; } }
+      `}</style>
     </section>
   );
 }

@@ -1,96 +1,49 @@
-const testimonials = [
-  {
-    name: "Sarah Chen",
-    role: "Senior Developer",
-    image:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200",
-    content:
-      "This AI-powered development platform has revolutionized how we write code. The intelligent suggestions save us hours every day.",
-  },
-  {
-    name: "Marcus Rodriguez",
-    role: "Tech Lead",
-    image:
-      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=200",
-    content:
-      "The automated testing and debugging features are game-changers. We ship code faster and with more confidence than ever before.",
-  },
-  {
-    name: "Emily Watson",
-    role: "CTO",
-    image:
-      "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=200",
-    content:
-      "Our development velocity increased by 300% since adopting this platform. It's like having a senior developer pair programming with every team member.",
-  },
+const REVIEWS = [
+  { name: "Tariq M.", role: "Director, Private School Group",
+    content: "They built our entire student portal — admissions, attendance, parent notifications — in under two weeks. The system is exactly what we described in the brief. Nothing more, nothing less." },
+  { name: "Hina R.", role: "Operations Manager, Healthcare Clinic",
+    content: "Our appointment system and patient records are now fully digital. The transition was seamless and the team was available every step of the way. Pricing was transparent from day one." },
+  { name: "Usman K.", role: "Founder, Retail Chain",
+    content: "We needed inventory, billing, and an e-commerce front — all integrated. AmicoTechs delivered all three in one system. Fast, works perfectly, and our staff picked it up immediately." },
 ];
 
 export default function Testimonials() {
   return (
-    <section
-      id="testimonials"
-      className="py-16 sm:py-20 px-10 sm:px-6 lg:px-8 relative"
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row items-start gap-8 sm:gap-12 lg:gap-16">
-          {/* Left side - Header */}
-          <div className="lg:w-1/2 w-full text-center lg:text-left">
-            <h2 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
-              What developers are saying about us
+    <section id="testimonials" style={{ padding: "5rem 2rem", backgroundColor: "#000", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 3fr", gap: "4rem", alignItems: "start" }} className="reviews-grid">
+
+          {/* Left */}
+          <div style={{ position: "sticky", top: 100 }}>
+            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.3em", textTransform: "uppercase", fontFamily: "monospace", marginBottom: 16 }}>Reviews</p>
+            <h2 style={{ fontSize: "clamp(2.4rem,4vw,3.5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
+              What our<br /><span style={{ color: "rgba(255,255,255,0.2)" }}>clients say</span>
             </h2>
-            <p className="text-gray-400 text-base text-xl sm:text-lg max-w-2xl mx-auto">
-              Everything you need to build, test, and deploy applications with
-              AI-powered development tools.
+            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)", fontWeight: 300, marginTop: 20, lineHeight: 1.7, maxWidth: 260 }}>
+              Straight up feedback from organisations we've built for.
             </p>
           </div>
 
-          {/* Right side - testimonials */}
-
-          <div className="lg:w-1/2 w-full">
-            <div className="space-y-6 sm:space-y-8">
-              {testimonials.map((testimonial, key) => (
-                <div
-                  key={key}
-                  className="bg-slate-900/50 p-4 sm:p-6 backdrop-blur-sm border border-slate-800 rounded-xl sm:rounded-2xl"
-                >
-                  <div className="flex items-start space-x-3 sm:space-x-4">
-                    <div className="flex-shrink-0">
-                      <div
-                        className="text-2xl sm:text-3xl lg:text-4xl font-bold 
-                      bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text 
-                      text-transparent"
-                      >
-                        "
-                      </div>
-                    </div>
-
-                    <div className="flex-grow">
-                      <p className="text-white text-base sm:text-lg leading-relaxed mb-3 sm:mb-4">
-                        {testimonial.content}
-                      </p>
-                      <div className="flex items-center space-x-2 sm:space-x-3">
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
-                        />
-                        <div>
-                          <h4 className="font-semibold text-white text-sm sm:text-base">
-                            {testimonial.name}
-                          </h4>
-                          <p className="text-xs sm:text-sm text-gray-400">
-                            {testimonial.role}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+          {/* Right */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {REVIEWS.map((r, i) => (
+              <div key={i} style={{ border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "1.8rem" }}>
+                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.52)", fontWeight: 300, lineHeight: 1.75, marginBottom: 20 }}>"{r.content}"</p>
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{ width: 34, height: 34, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <span style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", fontFamily: "monospace" }}>{r.name[0]}</span>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: "#fff" }}>{r.name}</p>
+                    <p style={{ fontSize: 12, color: "rgba(255,255,255,0.28)", fontWeight: 300 }}>{r.role}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+      <style>{`@media(max-width:768px){.reviews-grid{grid-template-columns:1fr!important;}}`}</style>
     </section>
   );
 }

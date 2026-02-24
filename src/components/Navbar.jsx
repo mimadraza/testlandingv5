@@ -1,93 +1,97 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-const navLinks = [
+const NAV_LINKS = [
   { label: "Services", href: "#services" },
+  { label: "How We Work", href: "#workflow" },
   { label: "Industries", href: "#industries" },
-  { label: "Tech", href: "#tech-stack" },
-  { label: "Workflow", href: "#workflow" },
   { label: "About", href: "#about" },
 ];
 
+const S = {
+  nav: (scrolled) => ({
+    position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+    backgroundColor: scrolled ? "rgba(0,0,0,0.92)" : "transparent",
+    backdropFilter: scrolled ? "blur(16px)" : "none",
+    borderBottom: scrolled ? "1px solid rgba(255,255,255,0.08)" : "none",
+    transition: "all 0.4s ease",
+  }),
+  inner: {
+    maxWidth: 1280, margin: "0 auto", padding: "0 2rem",
+    display: "flex", alignItems: "center", justifyContent: "space-between",
+    height: 68,
+  },
+  logo: {
+    color: "#fff", fontSize: 18, fontWeight: 800,
+    letterSpacing: "-0.03em", textDecoration: "none",
+    fontFamily: "inherit",
+  },
+  desktopLinks: {
+    display: "flex", alignItems: "center", gap: 36,
+  },
+  link: {
+    color: "rgba(255,255,255,0.5)", fontSize: 14, fontWeight: 300,
+    textDecoration: "none", letterSpacing: "0.02em",
+    transition: "color 0.2s",
+  },
+  cta: {
+    padding: "9px 22px",
+    border: "1px solid rgba(255,255,255,0.18)",
+    borderRadius: 6, color: "#fff", fontSize: 13,
+    fontWeight: 500, textDecoration: "none",
+    letterSpacing: "0.04em", transition: "all 0.2s",
+  },
+  mobileMenu: {
+    backgroundColor: "#000",
+    borderTop: "1px solid rgba(255,255,255,0.08)",
+    padding: "1.5rem 2rem",
+    display: "flex", flexDirection: "column", gap: 20,
+  },
+  mobileLink: {
+    color: "rgba(255,255,255,0.55)", fontSize: 15,
+    fontWeight: 300, textDecoration: "none",
+  },
+  mobileCta: {
+    display: "block", textAlign: "center",
+    padding: "11px 22px", backgroundColor: "#fff",
+    color: "#000", borderRadius: 6, fontSize: 14,
+    fontWeight: 600, textDecoration: "none",
+  },
+};
+
 export default function Navbar({ scrolled }) {
-  const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-slate-950/80 backdrop-blur-lg border-b border-slate-800"
-          : "bg-slate-950/20 backdrop-blur-sm"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-14 sm:h-16 md:h-20">
-          {/* Logo */}
-          <div className="flex items-center space-x-1 group cursor-pointer">
-            <img src="/logo.svg" alt="AmicoTechs logo" className="brand-logo invert"  />
-          </div>
+    <nav style={S.nav(scrolled)}>
+      <div style={S.inner}>
+        {/* Wordmark — no SVG, no img */}
+        <a href="#" style={S.logo}>AmicoTech</a>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-gray-300 hover:text-white text-sm lg:text-base transition-colors duration-200"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center">
-            <a
-              href="#contact"
-              className="px-5 py-2 bg-gradient-to-b from-blue-600 to-blue-400 rounded-lg font-semibold text-sm transition-all duration-300 hover:opacity-90"
-            >
-              Start Project
-            </a>
-          </div>
-
-          {/* Mobile Toggle */}
-          <button
-            className="md:hidden p-2 text-gray-300 hover:text-white"
-            onClick={() => setMobileMenuIsOpen((prev) => !prev)}
-          >
-            {mobileMenuIsOpen ? (
-              <X className="w-5 h-5 sm:w-6 sm:h-6" />
-            ) : (
-              <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
-            )}
-          </button>
+        {/* Desktop */}
+        <div style={{ ...S.desktopLinks, display: "none" }} className="desktop-nav">
+          {NAV_LINKS.map(l => (
+            <a key={l.href} href={l.href} style={S.link}>{l.label}</a>
+          ))}
         </div>
+        <a href="#contact" style={S.cta} className="desktop-cta">Contact Us</a>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileMenuIsOpen && (
-        <div className="md:hidden bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 animate-in slide-in-from-top duration-300">
-          <div className="px-4 py-4 sm:py-6 space-y-3 sm:space-y-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuIsOpen(false)}
-                className="block text-gray-300 hover:text-white text-sm lg:text-base transition-colors duration-200"
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={() => setMobileMenuIsOpen(false)}
-              className="block mt-2 text-center px-5 py-2.5 bg-gradient-to-b from-blue-600 to-blue-400 rounded-lg font-semibold text-sm"
-            >
-              Start Project
-            </a>
-          </div>
+      {open && (
+        <div style={S.mobileMenu}>
+          {NAV_LINKS.map(l => (
+            <a key={l.href} href={l.href} style={S.mobileLink} onClick={() => setOpen(false)}>{l.label}</a>
+          ))}
+          <a href="#contact" style={S.mobileCta} onClick={() => setOpen(false)}>Start a Project</a>
         </div>
       )}
+
+      <style>{`
+        @media (min-width: 768px) {
+          .desktop-nav { display: flex !important; }
+          .mobile-btn { display: none !important; }
+        }
+      `}</style>
     </nav>
   );
 }

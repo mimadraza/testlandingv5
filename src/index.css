@@ -1,71 +1,53 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap');
 
-@layer utilities {
-  .animate-in {
-    animation-fill-mode: both;
-  }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  .slide-in-from-top {
-    animation-name: slideInFromTop;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .slide-in-from-bottom {
-    animation-name: slideInFromBottom;
-  }
-
-  .duration-200 {
-    animation-duration: 200ms;
-  }
-
-  .duration-300 {
-    animation-duration: 300ms;
-  }
-
-  .duration-700 {
-    animation-duration: 700ms;
-  }
-
-  .delay-100 {
-    animation-delay: 100ms;
-  }
-
-  .delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .delay-300 {
-    animation-delay: 300ms;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
 }
 
-@keyframes slideInFromBottom {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
-@keyframes slideInFromTop {
-  from {
-    opacity: 0;
-    transform: translateY(-1rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* CRITICAL: kill any SVG/img that doesn't have explicit size */
+nav img, .brand-logo {
+  height: 28px !important;
+  width: auto !important;
+  max-width: 150px !important;
+  max-height: 28px !important;
+  display: block !important;
 }
 
-.brand-logo{
-  position: relative;
-  width: 220px;
-  height: 35px;
-  color: #ffffff;
-  margin-left: -12px;
+/* Dither canvas must never escape */
+.dither-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
 }
+.dither-container canvas,
+.dither-container > div,
+.dither-container > div > canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
+::selection { background: rgba(255,255,255,0.1); color: #fff; }

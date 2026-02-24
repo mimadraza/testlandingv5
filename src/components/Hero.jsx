@@ -1,128 +1,173 @@
-import { ArrowRight, ChevronDown, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
-import Dither from './Dither';
+import LetterGlitch from "./LetterGlitch";
+
+const AI_MODELS = ["Claude", "GPT-4o", "Kimi"];
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [modelIndex, setModelIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    function handleMouseMove(e) {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    }
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    const interval = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setModelIndex((i) => (i + 1) % AI_MODELS.length);
+        setVisible(true);
+      }, 300);
+    }, 2200);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-
-      {/* Dither Background */}
-      <div className="absolute inset-0 w-full h-full">
-        <Dither
-          waveColor={[0.1, 0.3, 0.6]}
-          disableAnimation={false}
-          enableMouseInteraction
-          mouseRadius={0}
-          colorNum={4}
-          waveAmplitude={0.3}
-          waveFrequency={3}
-          waveSpeed={0.1}
+    <section
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+        width: "100%",
+        backgroundColor: "#000",
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {/* B&W Dither — pinned to layer 0 */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+        <LetterGlitch
+          glitchSpeed={50}
+          centerVignette={true}
+          outerVignette={false}
+          smooth={true}
         />
       </div>
 
-      {/* Mouse-follow radial overlay */}
+      {/* Dark gradient overlay — layer 1 */}
       <div
-        className="absolute inset-0 opacity-40 pointer-events-none"
         style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0,0,0,0.9), transparent 40%)`,
+          position: "absolute",
+          inset: 0,
           zIndex: 1,
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.52) 50%, rgba(0,0,0,0.88) 100%)",
+          pointerEvents: "none",
         }}
       />
 
-      {/* Ambient blobs */}
-      <div className="absolute top-20 left-4 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ zIndex: 1 }} />
-      <div className="absolute bottom-20 right-4 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000 pointer-events-none" style={{ zIndex: 1 }} />
+      {/* Content — layer 2 */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          width: "100%",
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "7rem 2rem 4rem",
+        }}
+      >
+        {/* AI badge */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "2.5rem" }}>
+          <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 300 }}>
+            Powered by
+          </span>
+          <span
+            style={{
+              fontSize: "11px",
+              fontFamily: "monospace",
+              padding: "3px 14px",
+              border: "1px solid rgba(255,255,255,0.18)",
+              borderRadius: "999px",
+              color: "rgba(255,255,255,0.65)",
+              transition: "opacity 0.3s ease",
+              opacity: visible ? 1 : 0,
+            }}
+          >
+            {AI_MODELS[modelIndex]}
+          </span>
+        </div>
 
-      {/* Content */}
-      <div className="max-w-7xl mx-auto relative w-full" style={{ zIndex: 2 }}>
-        <div className="max-w-7xl mx-auto flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-
-          {/* Left — Copy */}
-          <div className="text-center lg:text-left">
-            <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-4 sm:mb-6 animate-in slide-in-from-bottom duration-700">
-              <Sparkles className="w-4 h-4 text-blue-400" />
-              <span className="text-xs sm:text-sm text-blue-300">
-                Digital systems that actually ship
-              </span>
-            </div>
-
-            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 sm:mb-6 animate-in slide-in-from-bottom duration-700 delay-100 leading-tight">
-              <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent block mb-1 sm:mb-2">
-                Build. Launch.
-              </span>
-              <span className="bg-gradient-to-b from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent block mb-1 sm:mb-2">
-                Scale.
-              </span>
-              <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent block text-3xl sm:text-2xl md:text-3xl lg:text-4xl">
-                In 72 Hours.
-              </span>
+        {/* Two-col grid */}
+        <div className="hero-grid">
+          {/* LEFT */}
+          <div>
+            <h1
+              style={{
+                fontSize: "clamp(3rem, 5.5vw, 5.5rem)",
+                fontWeight: 900,
+                lineHeight: 0.95,
+                letterSpacing: "-0.03em",
+                color: "#fff",
+                margin: "0 0 1.5rem 0",
+              }}
+            >
+              <span style={{ display: "block" }}>Effective.</span>
+              <span style={{ display: "block" }}>Efficient.</span>
+              <span style={{ display: "block", color: "#61dca3" }}>Operations.</span>
             </h1>
 
-            <p className="text-md sm:text-base lg:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 mb-4 sm:mb-6 animate-in slide-in-from-bottom duration-700 delay-200 leading-relaxed">
-              Take your business online, streamline operations, and scale with powerful digital solutions — built fast, built right.
+            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "1rem", fontWeight: 300, lineHeight: 1.75, maxWidth: "400px", margin: "0 0 1rem 0" }}>
+              AI-run, end-to-end digital systems for your organisation.
+              From your first website to full operational infrastructure.
             </p>
 
-            <ul className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6 sm:mb-8 animate-in slide-in-from-bottom duration-700 delay-200">
-              {["No jargon", "No hidden costs", "Just results"].map((item) => (
-                <li key={item} className="flex items-center gap-1.5 text-sm text-gray-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400 inline-block" />
-                  {item}
-                </li>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem", marginBottom: "2.5rem" }}>
+              {["No jargon", "No hidden charges", "Straight up work"].map((v) => (
+                <span key={v} style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.04em", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span style={{ width: "4px", height: "4px", borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.2)", display: "inline-block" }} />
+                  {v}
+                </span>
               ))}
-            </ul>
+            </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 animate-in slide-in-from-bottom duration-700 delay-300">
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
               <a
                 href="#contact"
-                className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-b from-blue-600 to-blue-400 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 hover:opacity-90 flex items-center justify-center space-x-2"
+                style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "13px 28px", backgroundColor: "#61dca3", color: "#000", fontSize: "14px", fontWeight: 600, borderRadius: "6px", textDecoration: "none", letterSpacing: "0.02em" }}
               >
-                <span>🚀 Start Your Project</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                Get it done in 72h <ArrowRight size={15} />
               </a>
-
               <a
-                href="#contact"
-                className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 hover:bg-white/10 flex items-center justify-center space-x-2"
+                href="#services"
+                style={{ display: "inline-flex", alignItems: "center", padding: "13px 28px", border: "1px solid rgba(255, 255, 255, 0.15)", backgroundColor: "rgb(255, 255, 255)", color: "rgb(0, 0, 0)", fontSize: "14px", fontWeight: 600, borderRadius: "6px", textDecoration: "none" }}
               >
-                <span>📞 Book a Consultation</span>
+                See our services
               </a>
             </div>
           </div>
 
-          {/* Right — Stat Cards */}
-          <div className="relative order-2 w-full flex flex-col gap-4 sm:gap-6 lg:gap-6">
-            {/* Main stat card */}
-            <div className="relative bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl text-center">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/5 rounded-xl sm:rounded-2xl" />
-              <p className="text-gray-400 text-sm uppercase tracking-widest mb-2 relative">Average delivery</p>
-              <p className="text-6xl sm:text-7xl font-bold bg-gradient-to-b from-blue-400 to-cyan-400 bg-clip-text text-transparent relative">72h</p>
-              <p className="text-gray-500 text-xs mt-2 relative">From idea to live system*</p>
+          {/* RIGHT */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            {/* 72h card */}
+            <div style={{ border: "1px solid rgba(255,255,255,0.1)", borderRadius: "12px", padding: "2rem", backgroundColor: "rgba(255,255,255,0.03)", textAlign: "center" }}>
+              <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.22)", textTransform: "uppercase", letterSpacing: "0.25em", marginBottom: "8px", fontWeight: 300 }}>
+                Average Delivery
+              </p>
+              <p style={{ fontSize: "clamp(4.5rem, 9vw, 7.5rem)", fontWeight: 900, color: "#61dca3", letterSpacing: "-0.04em", lineHeight: 1, margin: 0 }}>
+                72
+                <span style={{ fontSize: "clamp(4.5rem, 9vw, 7.5rem)", fontWeight: 900, color: "#ffffff", letterSpacing: "-0.04em", lineHeight: 1, margin: 0 }}>
+                  H
+              </span>
+              </p>
+              
+              <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.18)", marginTop: "8px", fontWeight: 300 }}>
+                From brief to live system
+              </p>
             </div>
 
-            {/* Value strip cards */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {/* 2×2 grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
               {[
-                { icon: "⚡", label: "72-Hour Delivery" },
-                { icon: "💼", label: "End-to-End Dev & Deploy" },
-                { icon: "📊", label: "Built for Growth" },
-                { icon: "🔍", label: "Transparent Pricing" },
+                { label: "Web Development", sub: "from $200" },
+                { label: "Web Apps", sub: "from $600" },
+                { label: "Mobile Apps", sub: "from $1,200" },
+                { label: "End-to-End Deploy", sub: "Included" },
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-3 sm:p-4 flex items-center gap-3 hover:border-blue-500/30 transition-colors duration-300"
+                  style={{ border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px", padding: "14px 16px", backgroundColor: "rgba(255,255,255,0.02)" }}
                 >
-                  <span className="text-xl">{item.icon}</span>
-                  <span className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">{item.label}</span>
+                  <p style={{ color: "#fff", fontSize: "13px", fontWeight: 500, lineHeight: 1.3, margin: 0 }}>{item.label}</p>
+                  <p style={{ color: "rgba(255,255,255,0.28)", fontSize: "12px", fontFamily: "monospace", marginTop: "4px" }}>{item.sub}</p>
                 </div>
               ))}
             </div>
@@ -130,10 +175,29 @@ export default function Hero() {
         </div>
 
         {/* Scroll hint */}
-        <div className="flex justify-center mt-12 animate-bounce" style={{ zIndex: 2 }}>
-          <ChevronDown className="w-6 h-6 text-gray-500" />
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "4rem" }}>
+          <ChevronDown size={20} style={{ color: "rgba(255,255,255,0.18)", animation: "heroBounce 2s ease-in-out infinite" }} />
         </div>
       </div>
+
+      <style>{`
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: center;
+        }
+        @media (max-width: 900px) {
+          .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+          }
+        }
+        @keyframes heroBounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(6px); }
+        }
+      `}</style>
     </section>
   );
 }

@@ -1,102 +1,57 @@
-const industries = [
+const INDUSTRIES = [
   {
-    icon: "🎓",
-    title: "Education",
-    description: "Pre-built systems for schools, colleges, and training institutes — customized to your operations.",
-    features: [
-      "Admission & Enrollment Portals",
-      "Attendance Management Systems",
-      "Learning & LMS Platforms",
-      "Billing & Payments",
-      "Parent & Staff Portals",
-    ],
+    label: "Education",
+    desc: "Tailored portals and platforms for schools, colleges, and training institutions.",
+    items: ["Admission Portals","Enrollment Portals","Attendance Management","Learning Systems (LMS)","Grade Tracking","Billing & Payments","Staff Portals","Internal Communications & Administration","Parent Portals & Notifications","Online Resource Libraries"],
   },
   {
-    icon: "🏥",
-    title: "Healthcare",
-    description: "End-to-end digital infrastructure for clinics, hospitals, and healthcare networks.",
-    features: [
-      "Patient Registration & Appointments",
-      "Electronic Medical Records",
-      "Billing & Insurance Systems",
-      "Inventory & Lab Management",
-      "Online Consultations",
-    ],
+    label: "Healthcare",
+    desc: "End-to-end digital infrastructure for clinics, hospitals, labs, and healthcare networks.",
+    items: ["Patient Registration & Appointment Management","Electronic Medical Records","Invoicing & Insurance Claims","Inventory Management","Laboratory Data Management & Report Delivery","Internal Communications & Supply Chain","Online Consultations","Client Portals"],
   },
   {
-    icon: "🛒",
-    title: "Retail",
-    description: "Operational and e-commerce systems built to move inventory, close sales, and retain customers.",
-    features: [
-      "Inventory & Order Management",
-      "POS & Billing Systems",
-      "Customer Support Systems",
-      "Sales Analytics & Forecasting",
-    ],
+    label: "Retail",
+    desc: "Operational and e-commerce systems built to move inventory, close sales, and grow revenue.",
+    items: ["Billing & Notifications","Inventory Management","Order Management","Sales & Query Management","E-Commerce Solutions","Purchase Order Tracking","Staff Management","Administration Portals","Customer Support","Data Analysis","Sales Forecasting"],
   },
 ];
 
 export default function Industries() {
   return (
-    <section
-      id="industries"
-      className="py-16 sm:py-20 px-10 sm:px-6 lg:px-8 relative"
-    >
-      {/* subtle section bg */}
-      <div className="absolute inset-0 bg-slate-900/30 pointer-events-none" />
+    <section id="industries" style={{ padding: "5rem 2rem", backgroundColor: "#000", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
 
-      <div className="max-w-7xl mx-auto relative">
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <h2 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
-            <span className="bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent">
-              Industry
-            </span>
-            <br />
-            <span className="bg-gradient-to-b from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Solutions
-            </span>
+        <div style={{ marginBottom: 48 }}>
+          <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.3em", textTransform: "uppercase", fontFamily: "monospace", marginBottom: 16 }}>Custom Services</p>
+          <h2 style={{ fontSize: "clamp(2.8rem,6vw,5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
+            Industry<br /><span style={{ color: "rgba(255,255,255,0.2)" }}>solutions</span>
           </h2>
-          <p className="text-gray-400 text-base text-xl sm:text-lg max-w-2xl mx-auto">
-            Pre-thought building blocks for your sector — customized to your operations.
+          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)", fontWeight: 300, marginTop: 20, maxWidth: 420, lineHeight: 1.7 }}>
+            We use our technical expertise to tailor-fit solutions to solve your problems — built specifically for your sector.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {industries.map((industry, key) => (
-            <div
-              key={key}
-              className="relative bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl sm:rounded-2xl p-6 sm:p-8 transition-all duration-300 group hover:border-blue-500/40 flex flex-col"
-            >
-              {/* Hover shimmer */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl sm:rounded-2xl pointer-events-none" />
-
-              <div className="text-4xl mb-4">{industry.icon}</div>
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{industry.title}</h3>
-              <p className="text-gray-400 text-sm sm:text-base mb-6 leading-relaxed">{industry.description}</p>
-
-              <ul className="space-y-2.5 mt-auto">
-                {industry.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2.5">
-                    <div className="flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
-                      <svg className="w-2.5 h-2.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span className="text-gray-300 text-sm sm:text-base">{feature}</span>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 2 }} className="industry-grid">
+          {INDUSTRIES.map(ind => (
+            <div key={ind.label} style={{ backgroundColor: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 10, padding: "2rem" }}>
+              <h3 style={{ fontSize: "1.4rem", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", marginBottom: 10 }}>{ind.label}</h3>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", fontWeight: 300, lineHeight: 1.65, marginBottom: 24 }}>{ind.desc}</p>
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
+                {ind.items.map(item => (
+                  <li key={item} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                    <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.22)", flexShrink: 0, marginTop: 6 }} />
+                    <span style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", fontWeight: 300 }}>{item}</span>
                   </li>
                 ))}
               </ul>
-
-              <a
-                href="#contact"
-                className="inline-flex items-center mt-6 text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium"
-              >
-                Learn more →
+              <a href="#contact" style={{ display: "inline-block", marginTop: 24, fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", color: "#fff", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.18)", paddingBottom: 2 }}>
+                Enquire →
               </a>
             </div>
           ))}
         </div>
       </div>
+      <style>{`@media(max-width:900px){.industry-grid{grid-template-columns:1fr!important;}}`}</style>
     </section>
   );
 }

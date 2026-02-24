@@ -1,98 +1,49 @@
-const steps = [
-  {
-    number: "01",
-    title: "Understanding Requirements",
-    description: "We analyze your business needs, goals, and constraints — then define exactly the right solution for your context.",
-  },
-  {
-    number: "02",
-    title: "Onboarding & Scope",
-    description: "Transparent scope of work with clear costs upfront. No surprises, no scope creep.",
-  },
-  {
-    number: "03",
-    title: "Mapping & Design",
-    description: "Wireframes, UI/UX prototypes, and milestone planning so you see exactly what's being built before a line of code is written.",
-  },
-  {
-    number: "04",
-    title: "Development",
-    description: "Full-scale product development with regular check-ins. You're never left wondering what's happening.",
-  },
-  {
-    number: "05",
-    title: "Deployment & Testing",
-    description: "Launch and real-world validation with you. We stay through go-live to ensure everything works as expected.",
-  },
+const STEPS = [
+  { n: "01", title: "Understanding Your Requirements",
+    desc: "We understand what you require and what your software needs to do for you. After getting the details we decide on a product that best suits your needs." },
+  { n: "02", title: "Onboarding & Kick Off",
+    desc: "A scope of work is drawn including all actions required to design, develop and deploy your software — with all associated costs. Complete transparency, no hidden charges." },
+  { n: "03", title: "Mapping & Design",
+    desc: "We map out the project and timelines for each milestone and get the final designs approved from you before a line of code is written." },
+  { n: "04", title: "Development",
+    desc: "We develop the software itself with regular check-ins. You're never left wondering what's happening." },
+  { n: "05", title: "Deployment & Testing",
+    desc: "We deploy the software and test it alongside you to make sure everything is operational exactly as you want it." },
 ];
 
 export default function Workflow() {
   return (
-    <section
-      id="workflow"
-      className="py-16 sm:py-20 px-10 sm:px-6 lg:px-8 relative"
-    >
-      <div className="absolute inset-0 bg-slate-900/30 pointer-events-none" />
+    <section id="workflow" style={{ padding: "5rem 2rem", backgroundColor: "#000", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
 
-      <div className="max-w-7xl mx-auto relative">
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <h2 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
-            <span className="bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent">
-              How We
-            </span>
-            <br />
-            <span className="bg-gradient-to-b from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Work
-            </span>
-          </h2>
-          <p className="text-gray-400 text-base text-xl sm:text-lg max-w-2xl mx-auto">
-            Clear, collaborative, and built around your timelines.
+        {/* Header */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 24, marginBottom: 48 }}>
+          <div>
+            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.3em", textTransform: "uppercase", fontFamily: "monospace", marginBottom: 16 }}>Our Workflow</p>
+            <h2 style={{ fontSize: "clamp(2.8rem,6vw,5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
+              How we<br /><span style={{ color: "rgba(255,255,255,0.2)" }}>get it done</span>
+            </h2>
+          </div>
+          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)", fontWeight: 300, maxWidth: 280, lineHeight: 1.7 }}>
+            Clear, collaborative, and built around your timelines — from brief to deployment.
           </p>
         </div>
 
-        <div className="relative">
-          {/* Connector line (desktop) */}
-          <div className="hidden lg:block absolute left-[calc(50%-1px)] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" />
-
-          <div className="space-y-8 sm:space-y-10 lg:space-y-0">
-            {steps.map((step, key) => {
-              const isEven = key % 2 === 0;
-              return (
-                <div
-                  key={key}
-                  className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-0 ${
-                    isEven ? "" : "lg:flex-row-reverse"
-                  }`}
-                >
-                  {/* Content side */}
-                  <div className={`flex-1 flex ${isEven ? "lg:justify-end lg:pr-12" : "lg:justify-start lg:pl-12"}`}>
-                    <div className="w-full lg:max-w-sm bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 hover:border-blue-500/40 transition-colors duration-300 group">
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl pointer-events-none" />
-                      <h3 className="text-white font-bold text-lg sm:text-xl mb-2">{step.title}</h3>
-                      <p className="text-gray-400 text-sm sm:text-base leading-relaxed">{step.description}</p>
-                    </div>
-                  </div>
-
-                  {/* Step number bubble (center on desktop) */}
-                  <div className="flex-shrink-0 z-10 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-b from-blue-600 to-blue-400 flex items-center justify-center shadow-lg shadow-blue-500/30 order-first lg:order-none">
-                    <span className="text-white font-bold text-sm sm:text-base font-mono">{step.number}</span>
-                  </div>
-
-                  {/* Empty placeholder for alternate side */}
-                  <div className="flex-1 hidden lg:block" />
-                </div>
-              );
-            })}
+        {/* Steps */}
+        {STEPS.map((s) => (
+          <div key={s.n} style={{ display: "flex", gap: 32, alignItems: "flex-start", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "28px 0", flexWrap: "wrap" }}>
+            <span style={{ fontFamily: "monospace", fontSize: 12, color: "rgba(255,255,255,0.18)", letterSpacing: "0.15em", minWidth: 36, paddingTop: 2 }}>{s.n}</span>
+            <div style={{ flex: 1, minWidth: 240 }}>
+              <h3 style={{ fontSize: "clamp(1rem,1.5vw,1.15rem)", fontWeight: 700, color: "#fff", marginBottom: 8, letterSpacing: "-0.01em" }}>{s.title}</h3>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.38)", fontWeight: 300, lineHeight: 1.75, maxWidth: 620 }}>{s.desc}</p>
+            </div>
           </div>
-        </div>
+        ))}
 
-        {/* Bottom CTA hint */}
-        <div className="text-center mt-16">
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-b from-blue-600 to-blue-400 rounded-lg font-semibold text-sm transition-all duration-300 hover:opacity-90"
-          >
-            Let's start →
+        {/* CTA */}
+        <div style={{ marginTop: 40, paddingTop: 40, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+          <a href="#contact" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "13px 28px", backgroundColor: "#fff", color: "#000", fontSize: 14, fontWeight: 600, borderRadius: 6, textDecoration: "none" }}>
+            Start your project →
           </a>
         </div>
       </div>
