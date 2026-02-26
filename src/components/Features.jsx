@@ -217,7 +217,7 @@ export default function Features() {
         <div style={{ marginBottom: 48 }}>
           <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.3em", textTransform: "uppercase", fontFamily: "monospace", marginBottom: 16 }}>Services</p>
           <h2 style={{ fontSize: "clamp(2.8rem,6vw,5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
-            What we<br /><span style={{ color: "rgba(255,255,255,0.2)" }}>build for you</span>
+            What we<br /><span style={{ color: "#61dca3" }}>build for you</span>
           </h2>
         </div>
         {SERVICES.map((s) => <ServiceBlock key={s.id} s={s} />)}

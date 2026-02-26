@@ -15,7 +15,7 @@ export default function About() {
           <div>
             <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.3em", textTransform: "uppercase", fontFamily: "monospace", marginBottom: 16 }}>About</p>
             <h2 style={{ fontSize: "clamp(2.8rem,5vw,4rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.04em", lineHeight: 0.95, marginBottom: 28 }}>
-              Crafted Tech
+              AmicoTech
             </h2>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <p style={{ fontSize: 14, color: "rgba(255,255,255,0.42)", fontWeight: 300, lineHeight: 1.8 }}>

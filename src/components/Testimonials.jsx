@@ -17,7 +17,7 @@ export default function Testimonials() {
           <div style={{ position: "sticky", top: 100 }}>
             <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.3em", textTransform: "uppercase", fontFamily: "monospace", marginBottom: 16 }}>Reviews</p>
             <h2 style={{ fontSize: "clamp(2.4rem,4vw,3.5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
-              What our<br /><span style={{ color: "rgba(255,255,255,0.2)" }}>clients say</span>
+              What our<br /><span style={{ color: "#61dca3" }}>clients say</span>
             </h2>
             <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)", fontWeight: 300, marginTop: 20, lineHeight: 1.7, maxWidth: 260 }}>
               Straight up feedback from organisations we've built for.

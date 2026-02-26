@@ -51,14 +51,17 @@ export default function Hero() {
       }}>
         {/* AI badge */}
         <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "2.5rem" }}>
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 300 }}>
+          <span style={{ fontSize: 13, color: "rgba(255, 255, 255, 0.94)", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 400 }}>
             Powered by
           </span>
           <span style={{
-            fontSize: 11, fontFamily: "monospace", padding: "3px 14px",
-            border: "1px solid rgba(255,255,255,0.18)", borderRadius: 999,
-            color: "rgba(255,255,255,0.65)", transition: "opacity 0.3s ease",
+            fontSize: 13, fontFamily: "monospace", padding: "5px 18px",
+            border: "1px solid rgba(255,255,255,0.45)", borderRadius: 999,
+            color: "rgba(255,255,255,0.92)", transition: "opacity 0.3s ease",
             opacity: visible ? 1 : 0,
+            backgroundColor: "rgba(255,255,255,0.07)",
+            fontWeight: 500,
+            letterSpacing: "0.05em",
           }}>
             {AI_MODELS[modelIndex]}
           </span>

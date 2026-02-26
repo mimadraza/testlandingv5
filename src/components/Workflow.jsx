@@ -64,7 +64,7 @@ export default function Workflow() {
             Our Workflow
           </p>
           <h2 style={{ fontSize: "clamp(2.8rem,6vw,5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
-            How we<br /><span style={{ color: "rgba(255,255,255,0.2)" }}>get it done</span>
+            How we<br /><span style={{ color: "#61dca3" }}>get it done</span>
           </h2>
         </div>
         <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)", fontWeight: 300, maxWidth: 280, lineHeight: 1.7 }}>

@@ -36,7 +36,7 @@ export default function TechStack() {
         </p>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 24 }}>
           <h2 style={{ fontSize: "clamp(2.8rem,6vw,5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
-            What we<br /><span style={{ color: "rgba(255,255,255,0.2)" }}>build with</span>
+            What we<br /><span style={{ color: "#61dca3" }}>build with</span>
           </h2>
           <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)", fontWeight: 300, maxWidth: 280, lineHeight: 1.7 }}>
             We don't chase trends — we choose what works best for your specific requirements.
